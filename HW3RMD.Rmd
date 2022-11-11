@@ -1,0 +1,134 @@
+---
+title: "HW03"
+author: "Victor Majestic"
+date: "11/11/22"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+### 1a.i
+
+```{r}
+p0 = (4.5^0*exp(-4.5))/factorial(0)
+p1 = (4.5^1*exp(-4.5))/factorial(1)
+p2 = (4.5^2*exp(-4.5))/factorial(2)
+p3 = (4.5^3*exp(-4.5))/factorial(3)
+p0 + p1 + p2 + p3
+```
+
+### 1a.ii
+```{r}
+ppois(3, 4.5, lower.tail = TRUE)
+```
+
+### 1b.i
+```{r}
+p4 = (4.5^4*exp(-4.5))/factorial(4)
+p5 = (4.5^5*exp(-4.5))/factorial(5)
+p6 = (4.5^6*exp(-4.5))/factorial(6)
+p3 + p4 + p5 + p6
+```
+
+### 1b.ii
+```{r}
+ppois(6, 4.5, lower.tail = TRUE) - ppois(2, 4.5, lower.tail = TRUE)
+```
+
+## Question 2
+
+### 2a
+```{r}
+pnorm(6.3, 5, 3, lower.tail = TRUE, log.p = FALSE)
+```
+
+### 2b
+```{r}
+pnorm(7.8, 5, 3, lower.tail = FALSE, log.p = FALSE)
+```
+
+### 2c
+```{r}
+pnorm(7.8, 5, 3, lower.tail = TRUE, log.p = FALSE) - pnorm(1.6, 5, 3, lower.tail = TRUE, log.p = FALSE)
+```
+
+### 2d
+```{r}
+qnorm(0.95, 5, 3, lower.tail = TRUE)
+```
+
+### 2e
+```{r}
+lowerbound = qnorm(0.025, 5, 3, lower.tail = TRUE)
+-lowerbound + 5
+```
+
+## Question 3
+
+### 3a
+```{r}
+set.seed(101)
+sample = rnorm(10000, 7, 2)
+mean(sample)
+sd(sample)
+```
+
+### 3b
+```{r sample}
+hist(sample)
+```
+
+## Question 6.1.12
+
+### 6.1.12a
+```{r}
+Rainfall <- read.csv("Ex6_1_12.csv", header=T)
+mean(Rainfall$rainfall)
+sd(Rainfall$rainfall)
+range(Rainfall$rainfall)
+max(Rainfall$rainfall) - min(Rainfall$rainfall)
+```
+
+### 6.1.12b
+```{r}
+Unseeded <- Rainfall[1:26, 1]
+mean(Unseeded)
+sd(Unseeded)
+range(Unseeded)
+max(Unseeded) - min(Unseeded)
+```
+
+### 6.1.12c
+```{r}
+Seeded <- Rainfall[27:52, 1]
+mean(Seeded)
+sd(Seeded)
+range(Seeded)
+max(Seeded) - min(Seeded)
+```
+
+## Question 6.2.4
+
+```{r}
+Gasoline <- read.csv("Ex6_2_4.csv", header=T)
+stem(Gasoline$OctRating)
+quantile(Gasoline$OctRating, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+```
+
+## Question 6.4.9
+```{r}
+Drug <- read.csv("Ex6_4_9.csv", header = T)
+HighDose <- Drug[1:21, 1]
+Control <- Drug[22:82, 1]
+boxplot(HighDose)
+boxplot(Control)
+```
+Neither distribution follows a normal curve. Both distributions are right-skewed, with the control group being an almost extreme case. The high-dose distribution has a median between 40 and 60. 25% of gene activity values fall between roughly 75 and the maximum 134.9; meanwhile the lower 75% fall within a similar range of the minimum 12.9 and roughly 75. The control group is even more right-skewed; 50% of the data values are greater than roughly 330. The maximum is around 3000. It appears as if this distribution has 7 extreme outliers. It is also evident that the median (and basically all of the distribution) of the high-dose group is much lower than that of the control group, indicating that the high-dose is effective in lowering gene activity.
